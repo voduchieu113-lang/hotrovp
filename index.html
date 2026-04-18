@@ -173,46 +173,6 @@ li{
             </a>
         </p>
     </div>
-```html
-<div>
-  <h3>Nhóm free gói và giao lưu</h3>
-
-  <!-- TRẠNG THÁI KHÓA -->
-  <div id="locked">
-    🔒 Đã khóa <br><br>
-    👉 <span style="color:blue;cursor:pointer;" onclick="goTikTok()">
-      Follow TikTok để mở khóa
-    </span>
-  </div>
-
-  <!-- TRẠNG THÁI MỞ -->
-  <div id="unlocked" style="display:none;">
-    ✅ Đã mở khóa <br><br>
-    <a href="https://zalo.me/g/gy3y1cop7nknoz2pkehz" target="_blank">
-      Vào nhóm Zalo
-    </a>
-  </div>
-</div>
-
-<script>
-function goTikTok() {
-  // lưu trạng thái đã bấm
-  localStorage.setItem("followed", "true");
-
-  // chuyển sang TikTok
-  window.open("https://www.tiktok.com/@billiards.game1", "_blank");
-}
-
-// khi load lại trang
-window.onload = function() {
-  if (localStorage.getItem("followed") === "true") {
-    document.getElementById("locked").style.display = "none";
-    document.getElementById("unlocked").style.display = "block";
-  }
-};
-</script>
-```
-
     <div class="card">
         <h3>📱 Hướng dẫn cài đặt</h3>
 
