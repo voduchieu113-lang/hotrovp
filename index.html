@@ -176,9 +176,9 @@ li{
 <div style="
   background:#f5f7fb;
   border-radius:14px;
-  padding:20px;
+  padding:22px;
   margin-top:15px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
   border:1px solid #e3e8f0;
   font-family:Arial;
 ">
@@ -188,31 +188,48 @@ li{
   </h3>
 
   <!-- nút -->
-  <span id="status" onclick="goTikTok()" 
+  <span id="status" onclick="start()" 
     style="
       display:inline-block;
-      padding:8px 16px;
+      padding:9px 18px;
       border-radius:999px;
       border:2px solid #4a90e2;
       color:#4a90e2;
       font-weight:600;
       cursor:pointer;
       background:#eef5ff;
-    ">
+      transition:all 0.25s ease;
+    "
+    onmouseover="hoverIn(this)"
+    onmouseout="hoverOut(this)"
+    onmousedown="this.style.transform='scale(0.95)'"
+    onmouseup="this.style.transform='scale(1)'"
+  >
     🔒 Follow TikTok để mở khóa
   </span>
 
   <!-- link -->
-  <div id="link" style="display:none; margin-top:15px;">
+  <div id="link" style="
+    display:none;
+    margin-top:18px;
+    opacity:0;
+    transform:translateY(10px);
+    transition:all 0.4s ease;
+  ">
     <a href="https://zalo.me/g/gy3y1cop7nknoz2pkehz" target="_blank"
       style="
-        padding:8px 14px;
-        border-radius:8px;
+        padding:9px 16px;
+        border-radius:10px;
         background:#4a90e2;
         color:white;
         text-decoration:none;
         font-weight:600;
-      ">
+        box-shadow:0 4px 10px rgba(74,144,226,0.3);
+        transition:0.25s;
+      "
+      onmouseover="this.style.background='#357abd'"
+      onmouseout="this.style.background='#4a90e2'"
+    >
       👉 Vào nhóm Zalo
     </a>
   </div>
@@ -220,29 +237,50 @@ li{
 </div>
 
 <script>
-function goTikTok() {
-  // đánh dấu đã bấm
-  localStorage.setItem("clickedTikTok", "true");
-
-  // chuyển sang TikTok
-  window.open("https://www.tiktok.com/@billiards.game1", "_blank");
+function hoverIn(el){
+  if(!el.classList.contains("loading")){
+    el.style.background = "#dcecff";
+  }
+}
+function hoverOut(el){
+  if(!el.classList.contains("loading")){
+    el.style.background = "#eef5ff";
+  }
 }
 
-// khi quay lại tab
-window.onfocus = function() {
-  if (localStorage.getItem("clickedTikTok") === "true") {
+function start() {
+  const s = document.getElementById("status");
+
+  // mở TikTok
+  window.open("https://www.tiktok.com/@billiards.game1", "_blank");
+
+  // trạng thái loading nhẹ (không hiện số)
+  s.classList.add("loading");
+  s.innerHTML = "⏳ Đang xác minh...";
+  s.style.pointerEvents = "none";
+  s.style.opacity = "0.7";
+
+  setTimeout(() => {
     unlock();
-  }
-};
+  }, 5000);
+}
 
 function unlock() {
   const s = document.getElementById("status");
+
   s.innerHTML = "✅ Đã mở khóa";
   s.style.borderColor = "#2ecc71";
   s.style.color = "#2ecc71";
   s.style.background = "#eafaf1";
+  s.style.opacity = "1";
 
-  document.getElementById("link").style.display = "block";
+  const link = document.getElementById("link");
+  link.style.display = "block";
+
+  setTimeout(()=>{
+    link.style.opacity = "1";
+    link.style.transform = "translateY(0)";
+  },50);
 }
 </script>
     <div class="card">
