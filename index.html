@@ -173,29 +173,22 @@ li{
             </a>
         </p>
     </div>
-    <div style="
+<div style="
   background:#f5f7fb;
   border-radius:14px;
   padding:20px;
   margin-top:15px;
   box-shadow:0 4px 12px rgba(0,0,0,0.06);
   border:1px solid #e3e8f0;
-  font-family:Arial, sans-serif;
+  font-family:Arial;
 ">
 
-  <!-- tiêu đề -->
-  <h3 style="
-    margin-bottom:15px;
-    color:#2c3e50;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  ">
+  <h3 style="margin-bottom:15px;color:#2c3e50;">
     🎵 Nhóm free gói và giao lưu
   </h3>
 
-  <!-- nút trạng thái -->
-  <span id="status" onclick="unlock()" 
+  <!-- nút -->
+  <span id="status" onclick="goTikTok()" 
     style="
       display:inline-block;
       padding:8px 16px;
@@ -204,31 +197,22 @@ li{
       color:#4a90e2;
       font-weight:600;
       cursor:pointer;
-      transition:all 0.25s ease;
       background:#eef5ff;
-    "
-    onmouseover="this.style.background='#dcecff'"
-    onmouseout="this.style.background='#eef5ff'"
-  >
-    🔒 Đã khóa • Follow TikTok để mở khóa
+    ">
+    🔒 Follow TikTok để mở khóa
   </span>
 
   <!-- link -->
   <div id="link" style="display:none; margin-top:15px;">
     <a href="https://zalo.me/g/gy3y1cop7nknoz2pkehz" target="_blank"
       style="
-        display:inline-block;
         padding:8px 14px;
         border-radius:8px;
         background:#4a90e2;
         color:white;
         text-decoration:none;
         font-weight:600;
-        transition:0.2s;
-      "
-      onmouseover="this.style.background='#357abd'"
-      onmouseout="this.style.background='#4a90e2'"
-    >
+      ">
       👉 Vào nhóm Zalo
     </a>
   </div>
@@ -236,9 +220,22 @@ li{
 </div>
 
 <script>
-function unlock() {
-  window.open("https://www.tiktok.com/@billiards.game1", "_blank");
+function goTikTok() {
+  // đánh dấu đã bấm
+  localStorage.setItem("clickedTikTok", "true");
 
+  // chuyển sang TikTok
+  window.open("https://www.tiktok.com/@billiards.game1", "_blank");
+}
+
+// khi quay lại tab
+window.onfocus = function() {
+  if (localStorage.getItem("clickedTikTok") === "true") {
+    unlock();
+  }
+};
+
+function unlock() {
   const s = document.getElementById("status");
   s.innerHTML = "✅ Đã mở khóa";
   s.style.borderColor = "#2ecc71";
@@ -248,7 +245,6 @@ function unlock() {
   document.getElementById("link").style.display = "block";
 }
 </script>
-
     <div class="card">
         <h3>📱 Hướng dẫn cài đặt</h3>
 
